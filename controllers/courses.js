@@ -180,3 +180,61 @@ export const getCoursesHandler = async (req, res) => {
             });
     }
 };
+
+export const editCourseHandler = async (req, res) => {
+    try {
+        // const user = await getUser(req?.authData.id);
+        const user = req?.authData;
+        if (user?.userType === "EDU_MANAGER") {
+            const updatedCourse = await editCourse(req?.params?.id, req?.body);
+            res.status(200)
+                .json({
+                    data: updatedCourse,
+                    status: updatedCourse !== null ? 200 : 400,
+                    error: null,
+                    ok: updatedCourse !== null,
+                    message: "",
+                })
+                .end(() => {
+                    // log
+                });
+        } else if (user.userType === "IT_MANAGER") {
+            const updatedCourse = await editCourse(req?.params?.id, req?.body);
+            res.status(200)
+                .json({
+                    data: updatedCourse,
+                    status: updatedCourse !== null ? 200 : 400,
+                    error: null,
+                    ok: updatedCourse !== null,
+                    message: "",
+                })
+                .end(() => {
+                    // log
+                });
+        } else {
+            res.status(400)
+                .json({
+                    data: null,
+                    status: 400,
+                    error: "access denied",
+                    ok: false,
+                    message: "you dont have permission",
+                })
+                .end(() => {
+                    // log
+                });
+        }
+    } catch (error) {
+        res.status(400)
+            .json({
+                data: null,
+                status: 400,
+                error: error,
+                ok: false,
+                message: "error in updating course",
+            })
+            .end(() => {
+                // log
+            });
+    }
+};
