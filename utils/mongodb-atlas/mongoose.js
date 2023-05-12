@@ -9,7 +9,7 @@ const database_url =
 mongoose.connect(database_url, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    dbName:"lms"
+    dbName:"Course-Selection"
 });
 
 export const mongoose_client = mongoose;
