@@ -227,3 +227,15 @@ export const editEDUManager = async (id, managerData) => {
         return null;
     }
 };
+
+export const deleteEDUManager = async (id) => {
+    try {
+        if (id.length > 0) {
+            await UserModel.findOneAndRemove({id, userType: "EDU_MANAGER"}).exec();
+            return true;
+        }
+        return false;
+    } catch (error) {
+        return false;
+    }
+};
