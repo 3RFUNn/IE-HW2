@@ -68,3 +68,19 @@ export const getProfessors = async () => {
         return [];
     }
 };
+
+export const addStudent = async (studentData) => {
+    try {
+        if (studentData?.firstName?.length > 0) {
+            const student = new UserModel({
+                ...studentData,
+                userType: "STUDENT",
+            });
+            await student.save();
+            return student;
+        }
+        return null;
+    } catch (error) {
+        return null;
+    }
+};
