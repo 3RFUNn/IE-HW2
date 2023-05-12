@@ -59,3 +59,12 @@ export const getProfessor = async (id) => {
         return null;
     }
 };
+
+export const getProfessors = async () => {
+    try {
+        const professors = await UserModel.find({userType: "PROFESSOR"}).exec();
+        return professors;
+    } catch (error) {
+        return [];
+    }
+};
