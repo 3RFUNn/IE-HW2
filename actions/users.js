@@ -121,4 +121,13 @@ export const getStudent = async (id) => {
     }
 };
 
+export const getStudents = async () => {
+    try {
+        const students = await UserModel.find({userType: "STUDENT"}).exec();
+        return students;
+    } catch (error) {
+        return [];
+    }
+};
+
 
