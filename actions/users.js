@@ -44,3 +44,18 @@ export const deleteProfessor = async (id) => {
         return false;
     }
 };
+
+export const getProfessor = async (id) => {
+    try {
+        if (id.length > 0) {
+            const professor = await UserModel.findOne({
+                id,
+                userType: "PROFESSOR",
+            }).exec();
+            return professor;
+        }
+        return null;
+    } catch (error) {
+        return null;
+    }
+};
