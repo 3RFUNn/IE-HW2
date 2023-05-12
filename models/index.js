@@ -124,3 +124,25 @@ export const CourseModel = mongoose_client.model("course", courseSchema);
 
 UserModel.watch().on("change", (data) => console.log(new Date(), data));
 CourseModel.watch().on("change", (data) => console.log(new Date(), data));
+
+(async () => {
+    const ITMAN = await UserModel.findOne({
+        id: "12344321",
+        userType: "IT_MANAGER",
+    }).exec();
+    if (!ITMAN) {
+        const itManager = new ItManagerModel({
+            firstName: "it",
+            lastName: "manager",
+            id: "14021402",
+            password: "AdminUser1402",
+            email: "adminuser@gmail.com",
+            mobileNumber: "09111111111",
+            userType: "IT_MANAGER",
+        });
+        await itManager.save();
+        console.log("it manager saved");
+    } else {
+        console.log("it manager => ", ITMAN);
+    }
+})();
