@@ -473,3 +473,135 @@ export const deleteProfessorHandler = async (req, res) => {
             });
     }
 };
+
+export const addStudentHandler = async (req, res) => {
+    try {
+        if (req?.authData?.userType === "IT_MANAGER") {
+            const studentAdded = await addStudent(req.body);
+            res.status(200)
+                .json({
+                    data: studentAdded,
+                    status: 200,
+                    error: null,
+                    ok: true,
+                    message: "",
+                })
+                .end(() => {
+                    // log
+                });
+        } else {
+            res.status(400)
+                .json({
+                    data: null,
+                    status: 400,
+                    error: "access denied",
+                    ok: false,
+                    message: "you dont have permission",
+                })
+                .end(() => {
+                    // log
+                });
+        }
+    } catch (error) {
+        res.status(400)
+            .json({
+                data: null,
+                status: 400,
+                error: error,
+                ok: false,
+                message: "error in adding student",
+            })
+            .end(() => {
+                // log
+            });
+    }
+};
+
+export const editStudentHandler = async (req, res) => {
+    try {
+        if (
+            req?.authData?.id === req?.params?.id ||
+            req?.authData?.userType === "IT_MANAGER"
+        ) {
+            const studentEdited = await editStudent(req?.params?.id, req.body);
+            res.status(200)
+                .json({
+                    data: studentEdited,
+                    status: 200,
+                    error: null,
+                    ok: true,
+                    message: "",
+                })
+                .end(() => {
+                    // log
+                });
+        } else {
+            res.status(400)
+                .json({
+                    data: null,
+                    status: 400,
+                    error: "access denied",
+                    ok: false,
+                    message: "you dont have permission",
+                })
+                .end(() => {
+                    // log
+                });
+        }
+    } catch (error) {
+        res.status(400)
+            .json({
+                data: null,
+                status: 400,
+                error: error,
+                ok: false,
+                message: "error in editing student",
+            })
+            .end(() => {
+                // log
+            });
+    }
+};
+
+export const deleteStudentHandler = async (req, res) => {
+    try {
+        if (req?.authData?.userType === "IT_MANAGER") {
+            const studentDeleted = await deleteStudent(req?.params?.id);
+            res.status(200)
+                .json({
+                    data: studentDeleted,
+                    status: 200,
+                    error: null,
+                    ok: true,
+                    message: "",
+                })
+                .end(() => {
+                    // log
+                });
+        } else {
+            res.status(400)
+                .json({
+                    data: null,
+                    status: 400,
+                    error: "access denied",
+                    ok: false,
+                    message: "you dont have permission",
+                })
+                .end(() => {
+                    // log
+                });
+        }
+    } catch (error) {
+        res.status(400)
+            .json({
+                data: null,
+                status: 400,
+                error: error,
+                ok: false,
+                message: "error in deleting student",
+            })
+            .end(() => {
+                // log
+            });
+    }
+};
