@@ -196,3 +196,19 @@ export const getITManagers = async () => {
         return [];
     }
 };
+
+export const addEDUManager = async (managerData) => {
+    try {
+        if (managerData?.firstName?.length > 0) {
+            const manager = new UserModel({
+                ...managerData,
+                userType: "EDU_MANAGER",
+            });
+            manager.save();
+            return manager;
+        }
+        return null;
+    } catch (error) {
+        return null;
+    }
+};
