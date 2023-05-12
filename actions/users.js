@@ -32,3 +32,15 @@ export const editProfessor = async (id, professorData) => {
         return null;
     }
 };
+
+export const deleteProfessor = async (id) => {
+    try {
+        if (id.length > 0) {
+            await UserModel.findOneAndRemove({id}).exec();
+            return true;
+        }
+        return false;
+    } catch (error) {
+        return false;
+    }
+};
