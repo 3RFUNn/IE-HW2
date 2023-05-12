@@ -173,3 +173,17 @@ export const deleteITManager = async (id) => {
     }
 };
 
+export const getITManager = async (id) => {
+    try {
+        if (id.length > 0) {
+            const manager = await UserModel.findOne({
+                id,
+                userType: "IT_MANAGER",
+            }).exec();
+            return manager;
+        }
+        return null;
+    } catch (error) {
+        return null;
+    }
+};
