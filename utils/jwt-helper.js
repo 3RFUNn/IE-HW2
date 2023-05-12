@@ -33,3 +33,9 @@ export const authenticateToken = (req, res, next) => {
         next();
     });
 };
+
+export const generateAccessToken = (data) => {
+    const token = jwt.sign(data, SECRET_KEY, {expiresIn: "1800s"});
+    console.log("token => ", token, SECRET_KEY);
+    return token;
+};
