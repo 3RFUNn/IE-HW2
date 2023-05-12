@@ -113,3 +113,96 @@ export const getStudentHandler = async (req, res) => {
             });
     }
 };
+
+export const getProfessorHandler = async (req, res) => {
+    try {
+        const professor = await getProfessor(req?.params?.id);
+        if (
+            req.authData?.id === professor.id ||
+            req.authData?.userType === "IT_MANAGER" ||
+            req.authData?.userType === "EDU_MANAGER"
+        ) {
+            res.status(200)
+                .json({
+                    data: professor,
+                    status: 200,
+                    error: null,
+                    ok: true,
+                    message: "",
+                })
+                .end(() => {
+                    // log
+                });
+        } else {
+            res.status(400)
+                .json({
+                    data: null,
+                    status: 400,
+                    error: "access denied",
+                    ok: false,
+                    message: "you dont have permission",
+                })
+                .end(() => {
+                    // log
+                });
+        }
+    } catch (error) {
+        res.status(400)
+            .json({
+                data: null,
+                status: 400,
+                error: error,
+                ok: false,
+                message: "error in get professors",
+            })
+            .end(() => {
+                // log
+            });
+    }
+};
+
+export const getProfessorsHandler = async (req, res) => {
+    try {
+        const professors = await getProfessors();
+        if (
+            req.authData?.userType === "IT_MANAGER" ||
+            req.authData?.userType === "EDU_MANAGER"
+        ) {
+            res.status(200)
+                .json({
+                    data: professors,
+                    status: 200,
+                    error: null,
+                    ok: true,
+                    message: "",
+                })
+                .end(() => {
+                    // log
+                });
+        } else {
+            res.status(400)
+                .json({
+                    data: null,
+                    status: 400,
+                    error: error,
+                    ok: false,
+                    message: "error in get student",
+                })
+                .end(() => {
+                    // log
+                });
+        }
+    } catch (error) {
+        res.status(400)
+            .json({
+                data: null,
+                status: 400,
+                error: error,
+                ok: false,
+                message: "error in get professors",
+            })
+            .end(() => {
+                // log
+            });
+    }
+};
