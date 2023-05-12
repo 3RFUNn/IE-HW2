@@ -97,3 +97,28 @@ export const editStudent = async (id, studentData) => {
     }
 };
 
+export const deleteStudent = async (id) => {
+    try {
+        if (id.length > 0) {
+            await UserModel.findOneAndRemove({id}).exec();
+            return true;
+        }
+        return false;
+    } catch (error) {
+        return false;
+    }
+};
+
+export const getStudent = async (id) => {
+    try {
+        if (id.length > 0) {
+            const student = await UserModel.findOne({id, userType: "STUDENT"}).exec();
+            return student;
+        }
+        return null;
+    } catch (error) {
+        return null;
+    }
+};
+
+
