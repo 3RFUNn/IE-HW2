@@ -254,3 +254,21 @@ export const getEDUManager = async (id) => {
         return null;
     }
 };
+
+export const getEDUManagers = async () => {
+    try {
+        const managers = await UserModel.find({userType: "EDU_MANAGER"}).exec();
+        return managers;
+    } catch (error) {
+        return [];
+    }
+};
+
+export const getUser = async (id) => {
+    try {
+        const user = await UserModel.findOne({id}).exec();
+        return user;
+    } catch (error) {
+        return null;
+    }
+};
