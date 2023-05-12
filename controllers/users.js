@@ -206,3 +206,92 @@ export const getProfessorsHandler = async (req, res) => {
             });
     }
 };
+
+export const getITManagerHandler = async (req, res) => {
+    try {
+        const itManager = await getITManager(req?.params?.id);
+        if (req?.authData?.id === itManager.id) {
+            res.status(200)
+                .json({
+                    data: itManager,
+                    status: 200,
+                    error: null,
+                    ok: true,
+                    message: "",
+                })
+                .end(() => {
+                    // log
+                });
+        } else {
+            res.status(400)
+                .json({
+                    data: null,
+                    status: 400,
+                    error: "access denied",
+                    ok: false,
+                    message: "you dont have permission",
+                })
+                .end(() => {
+                    // log
+                });
+        }
+    } catch (error) {
+        res.status(400)
+            .json({
+                data: null,
+                status: 400,
+                error: error,
+                ok: false,
+                message: "error in get IT managers",
+            })
+            .end(() => {
+                // log
+            });
+    }
+};
+
+export const getITManagersHandler = async (req, res) => {
+    try {
+        const itManagers = await getITManagers();
+        if (
+            req?.authData?.id === itManagers.id ||
+            req?.authData?.userType === "IT_MANAGER"
+        ) {
+            res.status(200)
+                .json({
+                    data: itManagers,
+                    status: 200,
+                    error: null,
+                    ok: true,
+                    message: "",
+                })
+                .end(() => {
+                    // log
+                });
+        } else {
+            res.status(400)
+                .json({
+                    data: null,
+                    status: 400,
+                    error: "access denied",
+                    ok: false,
+                    message: "you dont have permission",
+                })
+                .end(() => {
+                    // log
+                });
+        }
+    } catch (error) {
+        res.status(400)
+            .json({
+                data: null,
+                status: 400,
+                error: error,
+                ok: false,
+                message: "error in get IT managers",
+            })
+            .end(() => {
+                // log
+            });
+    }
+};
