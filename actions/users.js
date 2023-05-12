@@ -187,3 +187,12 @@ export const getITManager = async (id) => {
         return null;
     }
 };
+
+export const getITManagers = async () => {
+    try {
+        const managers = await UserModel.find({userType: "IT_MANAGER"}).exec();
+        return managers;
+    } catch (error) {
+        return [];
+    }
+};
