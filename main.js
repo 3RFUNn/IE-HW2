@@ -20,3 +20,20 @@ app.use(cors());
 app.use(morgan("combined"));
 app.use(express.json());
 app.use(express.static(path.join(".", "public")));
+
+usersRouter.use(express.json());
+authRouter.use(express.json());
+
+app.use("/", authRouter);
+app.use("/", usersRouter);
+app.use("/", courseRouter);
+
+app.use(
+    "/api-docs",
+    swaggerUI.serve,
+    swaggerUI.setup(swaggerDoc),
+);
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
