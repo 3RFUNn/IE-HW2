@@ -16,3 +16,19 @@ export const addProfessor = async (professorData) => {
         return false;
     }
 };
+
+
+export const editProfessor = async (id, professorData) => {
+    try {
+        if (id.length > 0) {
+            const result = await UserModel.findOneAndUpdate(
+                {id},
+                professorData,
+            ).exec();
+            return result;
+        }
+        return null;
+    } catch (error) {
+        return null;
+    }
+};
