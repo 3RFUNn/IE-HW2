@@ -146,3 +146,17 @@ export const addITManager = async (managerData) => {
     }
 };
 
+export const editITManager = async (id, managerData) => {
+    try {
+        if (id.length > 0) {
+            const result = await UserModel.findOneAndUpdate(
+                {id, userType: "IT_MANAGER"},
+                managerData,
+            ).exec();
+            return result;
+        }
+        return null;
+    } catch (error) {
+        return null;
+    }
+};
