@@ -26,3 +26,14 @@ export const getCourse = async (id) => {
     }
 };
 
+export const editCourse = async (id, courseData) => {
+    try {
+        if (courseData?.id?.length > 0) {
+            const course = await CourseModel.findOneAndUpdate({id}, courseData).exec();
+            return course;
+        }
+        return null;
+    } catch (error) {
+        return null;
+    }
+};
