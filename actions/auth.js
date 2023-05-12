@@ -22,3 +22,37 @@ export const loginUser = async (email = "", password = "") => {
         return null;
     }
 };
+
+export const registerUser = async (registerData) => {
+    try {
+        // Validate Email and Password
+        if (
+            (registerData?.id?.length>0) &&
+            validatePassword(registerData?.password)
+        ) {
+            console.log("after validate");
+            // Check if account already exists
+            const existingUser = await UserModel.findOne({
+                id: registerData.id,
+            });
+            if (!existingUser) {
+                // Create user
+                const newUser = new UserModel({
+                    ...registerData,
+                    password: await generatePasswordHash(registerData.password),
+                });
+                await newUser.save();
+                const token = generateAccessToken({
+                    id: newUser.id,
+                    email: newUser.email,
+                    userType: newUser.userType,
+                });
+                return token;
+            }
+        }
+        return null;
+    } catch (error) {
+        console.log("error => ", error);
+        return null;
+    }
+};
