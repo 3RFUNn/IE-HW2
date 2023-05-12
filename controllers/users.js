@@ -295,3 +295,46 @@ export const getITManagersHandler = async (req, res) => {
             });
     }
 };
+
+export const getEDUManagersHandler = async (req, res) => {
+    try {
+        const eduManagers = await getEDUManagers();
+        if (req?.authData?.userType === "IT_MANAGER") {
+            res.status(200)
+                .json({
+                    data: eduManagers,
+                    status: 200,
+                    error: null,
+                    ok: true,
+                    message: "",
+                })
+                .end(() => {
+                    // log
+                });
+        } else {
+            res.status(400)
+                .json({
+                    data: null,
+                    status: 400,
+                    error: "access denied",
+                    ok: false,
+                    message: "you dont have permission",
+                })
+                .end(() => {
+                    // log
+                });
+        }
+    } catch (error) {
+        res.status(400)
+            .json({
+                data: null,
+                status: 400,
+                error: error,
+                ok: false,
+                message: "error in get EDU Managers",
+            })
+            .end(() => {
+                // log
+            });
+    }
+};
