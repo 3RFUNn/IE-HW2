@@ -160,3 +160,16 @@ export const editITManager = async (id, managerData) => {
         return null;
     }
 };
+
+export const deleteITManager = async (id) => {
+    try {
+        if (id.length > 0) {
+            await UserModel.findOneAndRemove({id, userType: "IT_MANAGER"}).exec();
+            return true;
+        }
+        return false;
+    } catch (error) {
+        return false;
+    }
+};
+
