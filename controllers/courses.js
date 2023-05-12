@@ -437,3 +437,86 @@ export const addStudentToCourseHandler = async (req, res) => {
             });
     }
 };
+
+export const removeStudentFromCourseHandler = async (req, res) => {
+    try {
+        
+        const user = req?.authData;
+        if (user?.userType === "EDU_MANAGER") {
+            const course = await getCourse(req?.body?.courseId);
+            const student = await getStudent(req?.body?.studentId);
+            const updatedCourse = await editCourse(course.id, {
+                ...course,
+                students: course.students.filter((stid) => stid !== student.id),
+            });
+            const updatedStudent = await editStudent(student.id, {
+                ...student,
+                courses: student.courses.filter((cid) => cid !== course.id),
+            });
+            res.status(200)
+                .json({
+                    data: {
+                        course: updatedCourse,
+                        student: updatedStudent,
+                    },
+                    status: 200,
+                    error: null,
+                    ok: true,
+                    message: "student added",
+                })
+                .end(() => {
+                    // log
+                });
+        } else if (user.userType === "IT_MANAGER") {
+            const course = await getCourse(req?.body?.courseId);
+            const student = await getStudent(req?.body?.studentId);
+            const updatedCourse = await editCourse(course.id, {
+                ...course,
+                students: course.students.filter((stid) => stid !== student.id),
+            });
+            const updatedStudent = await editStudent(student.id, {
+                ...student,
+                courses: student.courses.filter((cid) => cid !== course.id),
+            });
+            res.status(200)
+                .json({
+                    data: {
+                        course: updatedCourse,
+                        student: updatedStudent,
+                    },
+                    status: 200,
+                    error: null,
+                    ok: true,
+                    message: "student added",
+                })
+                .end(() => {
+                    // log
+                });
+        } else {
+            res.status(400)
+                .json({
+                    data: null,
+                    status: 400,
+                    error: "access denied",
+                    ok: false,
+                    message: "you dont have permission",
+                })
+                .end(() => {
+                    // log
+                });
+        }
+    } catch (error) {
+        res.status(400)
+            .json({
+                data: null,
+                status: 400,
+                error: error,
+                ok: false,
+                message: "error in get course",
+            })
+            .end(() => {
+                // log
+            });
+    }
+};
+
