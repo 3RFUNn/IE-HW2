@@ -697,3 +697,181 @@ export const editITManagerHandler = async (req, res) => {
             });
     }
 };
+
+export const editEDUManagerHandler = async (req, res) => {
+    try {
+        if (
+            req?.authData?.id === req?.params?.id ||
+            req?.authData?.userType === "IT_MANAGER"
+        ) {
+            const eduManagerEdited = await editEDUManager(
+                req?.params?.id,
+                req?.body,
+            );
+            res.status(200)
+                .json({
+                    data: eduManagerEdited,
+                    status: 200,
+                    error: null,
+                    ok: true,
+                    message: "",
+                })
+                .end(() => {
+                    // log
+                });
+        } else {
+            res.status(400)
+                .json({
+                    data: null,
+                    status: 400,
+                    error: "access denied",
+                    ok: false,
+                    message: "you dont have permission",
+                })
+                .end(() => {
+                    // log
+                });
+        }
+    } catch (error) {
+        res.status(400)
+            .json({
+                data: null,
+                status: 400,
+                error: error,
+                ok: false,
+                message: "error in editing EDU Manager",
+            })
+            .end(() => {
+                // log
+            });
+    }
+};
+
+export const deleteITManagerHandler = async (req, res) => {
+    try {
+        if (req?.authData?.userType === "IT_MANAGER") {
+            const ITManagerDeleted = await deleteITManager(req?.params?.id);
+            res.status(200)
+                .json({
+                    data: ITManagerDeleted,
+                    status: 200,
+                    error: null,
+                    ok: true,
+                    message: "",
+                })
+                .end(() => {
+                    // log
+                });
+        } else {
+            res.status(400)
+                .json({
+                    data: null,
+                    status: 400,
+                    error: "access denied",
+                    ok: false,
+                    message: "you dont have permission",
+                })
+                .end(() => {
+                    // log
+                });
+        }
+    } catch (error) {
+        res.status(400)
+            .json({
+                data: null,
+                status: 400,
+                error: error,
+                ok: false,
+                message: "error in deleting IT manager",
+            })
+            .end(() => {
+                // log
+            });
+    }
+};
+
+export const deleteEDUManagerHandler = async (req, res) => {
+    try {
+        if (req?.authData?.userType === "IT_MANAGER") {
+            const eduManagerDeleted = await deleteEDUManager(req?.params?.id);
+            res.status(200)
+                .json({
+                    data: eduManagerDeleted,
+                    status: 200,
+                    error: null,
+                    ok: true,
+                    message: "",
+                })
+                .end(() => {
+                    // log
+                });
+        } else {
+            res.status(400)
+                .json({
+                    data: null,
+                    status: 400,
+                    error: "access denied",
+                    ok: false,
+                    message: "you dont have permission",
+                })
+                .end(() => {
+                    // log
+                });
+        }
+    } catch (error) {
+        res.status(400)
+            .json({
+                data: null,
+                status: 400,
+                error: error,
+                ok: false,
+                message: "error in deleting EDU manager",
+            })
+            .end(() => {
+                // log
+            });
+    }
+};
+
+export const addEDUManagerHandler = async (req, res) => {
+    try {
+        if (req?.authData?.userType === "IT_MANAGER") {
+            const EDUManagerAdded = await addEDUManager(req.body);
+            res.status(200)
+                .json({
+                    data: EDUManagerAdded,
+                    status: 200,
+                    error: null,
+                    ok: true,
+                    message: "",
+                })
+                .end(() => {
+                    // log
+                });
+        } else {
+            res.status(400)
+                .json({
+                    data: null,
+                    status: 400,
+                    error: "access denied",
+                    ok: false,
+                    message: "you dont have permission",
+                })
+                .end(() => {
+                    // log
+                });
+        }
+    } catch (error) {
+        res.status(400)
+            .json({
+                data: null,
+                status: 400,
+                error: error,
+                ok: false,
+                message: "error in adding EDU manager",
+            })
+            .end(() => {
+                // log
+            });
+    }
+};
