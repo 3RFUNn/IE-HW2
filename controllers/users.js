@@ -338,3 +338,46 @@ export const getEDUManagersHandler = async (req, res) => {
             });
     }
 };
+
+export const addProfessorHandler = async (req, res) => {
+    try {
+        if (req?.authData?.userType === "IT_MANAGER") {
+            const professorAdded = await addProfessor(req.body);
+            res.status(200)
+                .json({
+                    data: professorAdded,
+                    status: 200,
+                    error: null,
+                    ok: true,
+                    message: "",
+                })
+                .end(() => {
+                    // log
+                });
+        } else {
+            res.status(400)
+                .json({
+                    data: null,
+                    status: 400,
+                    error: "access denied",
+                    ok: false,
+                    message: "you dont have permission",
+                })
+                .end(() => {
+                    // log
+                });
+        }
+    } catch (error) {
+        res.status(400)
+            .json({
+                data: null,
+                status: 400,
+                error: error,
+                ok: false,
+                message: "error in adding professor",
+            })
+            .end(() => {
+                // log
+            });
+    }
+};
