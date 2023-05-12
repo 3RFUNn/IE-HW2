@@ -5,7 +5,6 @@ import {
     getCourses,
     editCourse,
 } from "../actions/courses.js";
-
 import {
     getStudent,
     getStudents,
@@ -297,7 +296,6 @@ export const deleteCourseHandler = async (req, res) => {
     }
 };
 
-
 export const addCourseHandler = async (req, res) => {
     try {
         // const user = await getUser(req?.authData.id);
@@ -440,7 +438,7 @@ export const addStudentToCourseHandler = async (req, res) => {
 
 export const removeStudentFromCourseHandler = async (req, res) => {
     try {
-        
+        // const user = await getUser(req?.authData.id);
         const user = req?.authData;
         if (user?.userType === "EDU_MANAGER") {
             const course = await getCourse(req?.body?.courseId);
@@ -519,4 +517,3 @@ export const removeStudentFromCourseHandler = async (req, res) => {
             });
     }
 };
-

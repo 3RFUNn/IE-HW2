@@ -1,4 +1,5 @@
 import {mongoose_client} from "../utils/mongodb-atlas/mongoose.js";
+const Schema = mongoose_client.Schema;
 
 const userSchema = new Schema({
     firstName: {
@@ -60,7 +61,7 @@ const userSchema = new Schema({
     },
 });
 
-//Course Schema creation
+//Create Approved Course Schema
 
 const courseSchema = new Schema({
     id: {
@@ -117,11 +118,9 @@ const courseSchema = new Schema({
     },
 });
 
-
-// Compiling the model from schema
+// Compile model from schema
 export const UserModel = mongoose_client.model("user", userSchema);
 export const CourseModel = mongoose_client.model("course", courseSchema);
 
 UserModel.watch().on("change", (data) => console.log(new Date(), data));
 CourseModel.watch().on("change", (data) => console.log(new Date(), data));
-

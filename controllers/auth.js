@@ -1,6 +1,5 @@
 import {loginUser, registerUser} from "../actions/auth.js";
 
-
 export const registerUserHandler = async (req, res) => {
     try {
         console.log("register =>", req?.body);

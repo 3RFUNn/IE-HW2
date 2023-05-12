@@ -1,6 +1,5 @@
 import {UserModel} from "../models/index.js";
 
-
 export const addProfessor = async (professorData) => {
     try {
         if (professorData?.firstName?.length > 0) {
@@ -16,7 +15,6 @@ export const addProfessor = async (professorData) => {
         return false;
     }
 };
-
 
 export const editProfessor = async (id, professorData) => {
     try {
