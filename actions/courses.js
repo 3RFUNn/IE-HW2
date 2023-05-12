@@ -37,3 +37,15 @@ export const editCourse = async (id, courseData) => {
         return null;
     }
 };
+
+export const deleteCourse = async (id) => {
+    try {
+        if (id?.length > 0) {
+            await CourseModel.findOneAndDelete({id}).exec();
+            return true;
+        }
+        return false;
+    } catch (error) {
+        return false;
+    }
+};
