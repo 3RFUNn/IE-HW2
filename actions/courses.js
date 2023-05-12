@@ -13,3 +13,16 @@ export const addCourse = async (courseData) => {
     }
 };
 
+export const getCourse = async (id) => {
+    
+    try {
+        if (id?.length > 0) {
+            const course = await CourseModel.findOne({id}).exec();
+            return course;
+        }
+        return null;
+    } catch (error) {
+        return null;
+    }
+};
+
