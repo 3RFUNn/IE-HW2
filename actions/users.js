@@ -239,3 +239,18 @@ export const deleteEDUManager = async (id) => {
         return false;
     }
 };
+
+export const getEDUManager = async (id) => {
+    try {
+        if (id.length > 0) {
+            const manager = await UserModel.findOne({
+                id,
+                userType: "EDU_MANAGER",
+            }).exec();
+            return manager;
+        }
+        return null;
+    } catch (error) {
+        return null;
+    }
+};
