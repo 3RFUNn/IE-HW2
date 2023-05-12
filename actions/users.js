@@ -130,4 +130,19 @@ export const getStudents = async () => {
     }
 };
 
+export const addITManager = async (managerData) => {
+    try {
+        if (managerData?.firstName?.length > 0) {
+            const manager = new UserModel({
+                ...managerData,
+                userType: "IT_MANAGER",
+            });
+            await manager.save();
+            return manager;
+        }
+        return null;
+    } catch (error) {
+        return null;
+    }
+};
 
