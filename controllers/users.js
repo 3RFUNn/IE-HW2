@@ -1,4 +1,4 @@
-// import {generateAccessToken} from "../utils/jwt-helper.js";
+import {generateAccessToken} from "../utils/jwt-helper.js";
 import {
     addEDUManager,
     addITManager,
