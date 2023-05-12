@@ -84,3 +84,16 @@ export const addStudent = async (studentData) => {
         return null;
     }
 };
+
+export const editStudent = async (id, studentData) => {
+    try {
+        if (id.length > 0) {
+            const result = await UserModel.findOneAndUpdate({id}, studentData).exec();
+            return result;
+        }
+        return null;
+    } catch (error) {
+        return null;
+    }
+};
+
