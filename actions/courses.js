@@ -49,3 +49,12 @@ export const deleteCourse = async (id) => {
         return false;
     }
 };
+
+export const getCourses = async () => {
+    try {
+        const courses = await CourseModel.find({}).exec();
+        return courses;
+    } catch (error) {
+        return [];
+    }
+};
