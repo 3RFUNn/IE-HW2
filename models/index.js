@@ -116,3 +116,12 @@ const courseSchema = new Schema({
         default: [],
     },
 });
+
+
+// Compiling the model from schema
+export const UserModel = mongoose_client.model("user", userSchema);
+export const CourseModel = mongoose_client.model("course", courseSchema);
+
+UserModel.watch().on("change", (data) => console.log(new Date(), data));
+CourseModel.watch().on("change", (data) => console.log(new Date(), data));
+
