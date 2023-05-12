@@ -212,3 +212,18 @@ export const addEDUManager = async (managerData) => {
         return null;
     }
 };
+
+export const editEDUManager = async (id, managerData) => {
+    try {
+        if (id.length > 0) {
+            const result = await UserModel.findOneAndUpdate(
+                {id, userType: "EDU_MANAGER"},
+                managerData,
+            ).exec();
+            return result;
+        }
+        return null;
+    } catch (error) {
+        return null;
+    }
+};
