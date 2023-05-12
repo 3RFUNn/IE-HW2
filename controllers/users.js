@@ -381,3 +381,95 @@ export const addProfessorHandler = async (req, res) => {
             });
     }
 };
+
+export const editProfessorHandler = async (req, res) => {
+    try {
+        if (
+            req?.authData?.id === req?.params?.id ||
+            req?.authData?.userType === "IT_MANAGER"
+        ) {
+            const professorEdited = await editProfessor(
+                req?.params?.id,
+                req.body,
+            );
+            res.status(200)
+                .json({
+                    data: professorEdited,
+                    status: 200,
+                    error: null,
+                    ok: true,
+                    message: "",
+                })
+                .end(() => {
+                    // log
+                });
+        } else {
+            res.status(400)
+                .json({
+                    data: null,
+                    status: 400,
+                    error: "access denied",
+                    ok: false,
+                    message: "you dont have permission",
+                })
+                .end(() => {
+                    // log
+                });
+        }
+    } catch (error) {
+        res.status(400)
+            .json({
+                data: null,
+                status: 400,
+                error: error,
+                ok: false,
+                message: "error in editing professor",
+            })
+            .end(() => {
+                // log
+            });
+    }
+};
+
+export const deleteProfessorHandler = async (req, res) => {
+    try {
+        if (req?.authData?.userType === "IT_MANAGER") {
+            const professorDeleted = await deleteProfessor(req?.params?.id);
+            res.status(200)
+                .json({
+                    data: professorDeleted,
+                    status: 200,
+                    error: null,
+                    ok: true,
+                    message: "",
+                })
+                .end(() => {
+                    // log
+                });
+        } else {
+            res.status(400)
+                .json({
+                    data: null,
+                    status: 400,
+                    error: "access denied",
+                    ok: false,
+                    message: "you dont have permission",
+                })
+                .end(() => {
+                    // log
+                });
+        }
+    } catch (error) {
+        res.status(400)
+            .json({
+                data: null,
+                status: 400,
+                error: error,
+                ok: false,
+                message: "error in deleting professor",
+            })
+            .end(() => {
+                // log
+            });
+    }
+};
