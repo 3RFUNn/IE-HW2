@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const database_url =
     process.env.MONGO_URI ||
-    "mongodb+srv://admin:admin@cluster0.hgphhqj.mongodb.net/?retryWrites=true&w=majority";
+    "mongodb+srv://admin:Et2Ozs6CnwZ4CFiR@cluster0.hgphhqj.mongodb.net/?retryWrites=true&w=majority";
 
 
 
